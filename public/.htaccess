@@ -1,0 +1,3 @@
+# Denegar acceso a todo el mundo
+Order deny,allow
+Deny from all
