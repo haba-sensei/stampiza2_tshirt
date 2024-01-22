@@ -8,9 +8,9 @@ const FilePicker = ({ readFile }) => {
 				<div className='grid grid-cols-4 grid-rows-2 gap-5'>
 					<div className='cursor-pointer'>
 						<img
-							src={`673-arana_negra(Araña Negra).png`}
+							src={`https://firebasestorage.googleapis.com/v0/b/stampiza2.appspot.com/o/452-respect_the_beard(Respect%20the%20beard).png?alt=media&token=34464818-fdf2-4a4d-ac9d-cc74b4c9a5fd`}
 							alt={`Imagen 1`}
-							onClick={() => readFile('673-arana_negra(Araña Negra).png')}
+							onClick={() => readFile('https://firebasestorage.googleapis.com/v0/b/stampiza2.appspot.com/o/452-respect_the_beard(Respect%20the%20beard).png?alt=media&token=34464818-fdf2-4a4d-ac9d-cc74b4c9a5fd')}
 							loading='lazy'
 						/>
 					</div>
