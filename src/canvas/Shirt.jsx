@@ -8,43 +8,66 @@ import state from '../store';
 import { useEffect, useState } from 'react';
 
 const Shirt = () => {
-	const snap = useSnapshot(state);
-	const { nodes, materials } = useGLTF('/shirt_baked.glb');
-	const [textureUrl, setTextureUrl] = useState(snap.logoDecal);
+    const snap = useSnapshot(state);
+    const { nodes, materials } = useGLTF('/shirt_baked.glb');
+    const [base64Url, setBase64Url] = useState(snap.logoDecal);
 
-	useEffect(() => {
-		setTextureUrl(snap.logoDecal);
-	}, [snap.logoDecal]);
+    useEffect(() => {
+        const fetchImageAsBase64 = async () => {
+            try {
+                const response = await fetch(snap.logoDecal);
+                const blob = await response.blob();
+                const base64 = await convertBlobToBase64(blob);
+                setBase64Url(base64);
+            } catch (error) {
+                console.error('Error fetching image:', error);
+            }
+        };
 
-	const logoTexture = useTexture(textureUrl);
+        fetchImageAsBase64();
+    }, [snap.logoDecal]);
 
-	useFrame((state, delta) => {
-		easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
-	});
+    const logoTexture = useTexture(base64Url);
 
-	const stateString = JSON.stringify(snap);
+    useFrame((state, delta) => {
+        easing.dampC(materials.lambert1.color, snap.color, 0.25, delta);
+    });
 
-	return (
-		<group key={stateString}>
-			<mesh
-				castShadow
-				geometry={nodes.T_Shirt_male.geometry}
-				material={materials.lambert1}
-				roughness={1}
-				dispose={null}
-			>
-				<Decal
-					position={[0, 0.04, 0.19]}
-					rotation={[0, 0, 0]}
-					scale={0.25}
-					map={logoTexture}
-					anisotropy={16}
-					depthTest={false}
-					depthWrite={true}
-				/>
-			</mesh>
-		</group>
-	);
+    const stateString = JSON.stringify(snap);
+
+    return (
+        <group key={stateString}>
+            <mesh
+                castShadow
+                geometry={nodes.T_Shirt_male.geometry}
+                material={materials.lambert1}
+                roughness={1}
+                dispose={null}
+            >
+                <Decal
+                    position={[0, 0.04, 0.19]}
+                    rotation={[0, 0, 0]}
+                    scale={0.25}
+                    map={logoTexture}
+                    anisotropy={16}
+                    depthTest={false}
+                    depthWrite={true}
+                />
+            </mesh>
+        </group>
+    );
+};
+
+// Función para convertir un Blob a base64
+const convertBlobToBase64 = (blob) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = reject;
+        reader.onload = () => {
+            resolve(reader.result);
+        };
+        reader.readAsDataURL(blob);
+    });
 };
 
 export default Shirt;

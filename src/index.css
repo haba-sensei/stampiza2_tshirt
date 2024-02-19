@@ -55,6 +55,10 @@ html {
 	@apply absolute left-full ml-3 glassmorphism p-3 w-[50vh] h-[90%] flex flex-col rounded-md;
 }
 
+.details-container {
+	@apply absolute left-full ml-3 glassmorphism p-3 w-[50vh] h-[90%] flex flex-col rounded-md;
+}
+
 .filepicker-label {
 	@apply border border-gray-300 py-1.5 px-2 rounded-md shadow-sm text-xs text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 cursor-pointer w-fit;
 }
@@ -90,3 +94,51 @@ input[type='file'] {
 .sketch-picker > div:nth-child(3) {
 	display: none !important;
 }
+
+.scrollable-categories {
+    max-height: 100%; 
+    overflow-y: auto;
+}
+
+.scrollable-subcategories {
+    max-height: 100%; 
+    overflow-y: auto;
+}
+ 
+.scrollable-categories::-webkit-scrollbar,
+.scrollable-subcategories::-webkit-scrollbar {
+    width: 10px;  
+}
+
+.scrollable-categories::-webkit-scrollbar-thumb,
+.scrollable-subcategories::-webkit-scrollbar-thumb {
+    background-color: #2640c0;  
+    border-radius: 5px;  
+} 
+.scrollable-categories {
+    scrollbar-width: thin;  
+}
+
+.scrollable-categories {
+    scrollbar-color: #2640c0 transparent; 
+}
+
+.scrollable-subcategories {
+    scrollbar-width: thin;  
+}
+
+.scrollable-subcategories {
+    scrollbar-color: #2640c0 transparent;  
+}
+
+.scrollable-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Dos columnas por fila */
+    gap: 20px; /* Espacio entre las categorías */
+}
+
+.scrollable-categories img {
+    width: 100%; /* Ajusta el ancho de las imágenes para ocupar todo el espacio del contenedor */
+    height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+}
+

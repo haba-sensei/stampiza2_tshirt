@@ -3,15 +3,28 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useSnapshot } from 'valtio';
 
 import state from '../store';
-import { FilterTabs} from '../config/constants';
 import { fadeAnimation, slideAnimation } from '../config/motion';
-import { CustomButton, FilePicker, Tab } from '../components';
+import { CustomButton, Tab } from '../components';
+import { camiseta_blanca, camiseta_negra } from '../assets';
+import ImagePicker from '../components/ImagePicker';
+import Title from '../components/Title';
 
 const Customizer = () => {
 	const snap = useSnapshot(state);
 	const [activeFilterTab, setActiveFilterTab] = useState({
-		logoShirt: true
+		logoShirt: true,
 	});
+
+	const FilterTabs = [
+		{
+			name: 'changeColor',
+			icon: state.tshirt,
+		},
+		{
+			name: 'clearLogo',
+			icon: state.clear,
+		},
+	];
 
 	const handleActiveFilterTab = (tabName) => {
 		switch (tabName) {
@@ -23,6 +36,7 @@ const Customizer = () => {
 				break;
 			case 'changeColor':
 				state.color = state.color === '#4A4A4A' ? '#FFFFFF' : '#4A4A4A';
+				state.tshirt = state.color === '#4A4A4A' ? camiseta_blanca : camiseta_negra;
 				break;
 			default:
 				state.color = '#4A4A4A';
@@ -37,12 +51,6 @@ const Customizer = () => {
 		});
 	};
 
-	const readFile = (type) => {
-		if(type === 'clear') handleActiveFilterTab('clearLogo')
-		else
-		state.logoDecal = type;
-	};
-
 	return (
 		<AnimatePresence>
 			{!snap.intro && (
@@ -52,8 +60,13 @@ const Customizer = () => {
 						className='absolute top-0 left-0 z-10'
 						{...fadeAnimation}
 					>
-						<div className='flex items-center min-h-screen'> 
-							<FilePicker	readFile={readFile}	/>
+						<div className='flex items-center min-h-screen'>
+							<div className='filepicker-container'>
+								<div className='flex flex-col flex-1'>
+									<Title name={snap.title} />
+									<ImagePicker />
+								</div>
+							</div>
 						</div>
 					</motion.div>
 					<motion.div
@@ -62,20 +75,9 @@ const Customizer = () => {
 					>
 						<CustomButton
 							type='filled'
-							title='Go Back'
-							handleClick={() =>  (state.intro = true)}
-							customStyles='w-fit px-4 py-2.5 font-bold text-sm'
-						/>
-					</motion.div>
-					<motion.div
-						className='absolute z-11 bottom-10 right-5'
-						{...fadeAnimation}
-					>
-						<CustomButton
-							type='filled'
-							title='Go Back'
-							handleClick={() =>  (state.intro = true)}
-							customStyles='w-fit px-4 py-2.5 font-bold text-sm'
+							title='Inicio'
+							handleClick={() => (state.intro = true)}
+							customStyles='w-fit px-4 py-2.5  text-sm font-semibold tracking-wider'
 						/>
 					</motion.div>
 					<motion.div
@@ -87,7 +89,6 @@ const Customizer = () => {
 								key={tab.name}
 								tab={tab}
 								isFilterTab
-								isActiveTab={activeFilterTab[tab.name]}
 								handleClick={() => handleActiveFilterTab(tab.name)}
 							/>
 						))}

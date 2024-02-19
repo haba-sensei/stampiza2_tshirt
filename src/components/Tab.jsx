@@ -1,20 +1,11 @@
-import { useSnapshot } from 'valtio';
 import PropTypes from 'prop-types';
-import state from '../store';
 
-const Tab = ({ tab, isFilterTab, isActiveTab, handleClick }) => {
-	const snap = useSnapshot(state)
-
-  const activeStyles = isFilterTab && isActiveTab 
-    ? { backgroundColor: snap.color, opacity: 0.5 }
-    : { backgroundColor: 'transparent', opacity: 1 }
-
+const Tab = ({ tab, isFilterTab, handleClick }) => { 
 	return (
 		<div
 			key={tab.name}
 			className={`tab-btn ${isFilterTab ? 'rounded-full glassmorphism' : 'rounded-4'}`}
       onClick={handleClick}
-      style={activeStyles}
     >
 			<img 
         src={tab.icon}
@@ -27,8 +18,7 @@ const Tab = ({ tab, isFilterTab, isActiveTab, handleClick }) => {
 
 Tab.propTypes = {
 	tab: PropTypes.any,
-	isFilterTab: PropTypes.any,
-	isActiveTab: PropTypes.any,
+	isFilterTab: PropTypes.any, 
 	handleClick: PropTypes.any,
 };
 

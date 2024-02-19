@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas } from '@react-three/fiber';
-import { Environment, Center } from '@react-three/drei';
+import { Environment } from '@react-three/drei';
 
 import Shirt from './Shirt';
 import Backdrop from './Backdrop';
@@ -19,9 +19,7 @@ const CanvasModel = () => {
 
 			<CameraRig>
 				<Backdrop />
-				<Center>
-					<Shirt />
-				</Center>
+				<Shirt /> 
 			</CameraRig>
 		</Canvas>
 	);
