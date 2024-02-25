@@ -1,14 +1,16 @@
 import { proxy } from "valtio";
-import { camiseta_blanca, limpiar } from "../assets";
+import { camiseta_blanca, limpiar, buscar, agregar, talla} from "../assets";
 
 const state = proxy({
     intro: true,
     color: '#FFFFFF',
     tshirt: camiseta_blanca,
     clear: limpiar,
+    buscar: buscar,
+    agregar: agregar,
+    talla: talla,
     title: 'Categorias',
-    showSubCat: false,
-    showProdList: false,
+    showCat: false,
     isLogoTexture: true, 
     logoDecalBuffer: "",
     logoDecal: './832-daredevil(Daredevil).png',

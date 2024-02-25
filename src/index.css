@@ -7,7 +7,16 @@
 
 html {
 	font-family: 'Inter', sans-serif;
+	background-color: #3B3BCB;
 }
+
+.loader {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
 
 @supports (font-variation-settings: normal) {
 	html {
@@ -40,7 +49,7 @@ html {
 }
 
 .filtertabs-container {
-	@apply absolute left-0 right-0 z-10 flex flex-wrap items-center justify-center w-full gap-4 bottom-5;
+	@apply absolute left-0 right-0 z-10 flex flex-wrap items-center justify-center w-full gap-4;
 }
 
 .aipicker-container {

@@ -1,17 +1,15 @@
-import Canvas from './canvas'
-import User from './components/User'
-import Customizer from './pages/Customizer'
-import Home from './pages/Home'
+import Customizer from './pages/Customizer';
+import Home from './pages/Home';
+import Canvas from './canvas';
 
 function App() {
-  return ( 
-      <main className='transition-all ease-in app'>
-        <Home />
-        <Canvas />
-        <Customizer />
-        <User />
-      </main>  
-  )
+	return (
+		<main className='transition-all ease-in app' style={{ height: '90vh', overflow: 'hidden' }}> 
+			<Home />
+			<Canvas />
+			<Customizer />
+		</main>
+	);
 }
 
-export default App
+export default App;
